@@ -5,6 +5,7 @@ var nodeTitle = document.getElementById('title');
 var nodeImg  = document.getElementById('image');
 var divStudents = document.getElementById('students');
 var divFilters = document.getElementById('filters');
+var divMessage = document.getElementById('message');
 var selectCourse = divFilters.children[0]; // enfant d'indice 0
 
 var config = {
@@ -130,11 +131,10 @@ selectCourse.addEventListener('change', function() {
   let selectedCourse = this.value;
 
 
-
-
-
   if (selectedCourse == '0') {
     config.studentsFiltered = config.students;
+    //affichage du message
+    divMessage.innerText = '';
   } else {
     // modifier la source de données par rapport
     // à l'option choisie
@@ -142,6 +142,9 @@ selectCourse.addEventListener('change', function() {
       return student.attendedCourses.indexOf(selectedCourse) != -1;
     })
     config.studentsFiltered = studentsFiltered;
+
+    //affichage du divMessage
+    divMessage.innerText = config.studentsFiltered.length + ' étudiant(s) trouvé(s)';
   }
 
   // on recrée DOM
