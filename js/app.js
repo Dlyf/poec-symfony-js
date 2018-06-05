@@ -7,6 +7,8 @@ var divStudents = document.getElementById('students');
 var divFilters = document.getElementById('filters');
 var divMessage = document.getElementById('message');
 var selectCourse = divFilters.children[0]; // enfant d'indice 0
+var checkMajor = divFilters.children[2];
+var textSearch = divFilters.children[3]; // enfant d'indice 3
 
 var config = {
   appVersion: 1,
@@ -21,7 +23,8 @@ var config = {
    {name: 'tristan', age: 23, attendedCourses: ['Symfony', 'javascript', ]},
    {name: 'Nakkib', age: 30, attendedCourses: ['PHP', 'javascript', 'Angular', 'Nodejs']}
  ],
- studentsFiltered: null
+ studentsFiltered: null,
+ ageMajority:18
 };
 
 // 2. FONCTIONS
@@ -152,5 +155,32 @@ selectCourse.addEventListener('change', function() {
 
 })
 
+checkMajor.addEventListener('click', function() {
+  if(this.checked) {
+      let studentsFiltered = config.students.filter(student => student.age >  config.ageMajority);
+
+      //mise à jour du DOM
+      config.studentsFiltered = studentsFiltered;
+
+  } else {
+    config.studentsFiltered = config.students;
+  }
+
+  //mise à jour du DOM
+  divStudents.innerHTML = buildStudentTable();
+})
+
+textSearch.addEventListener('keyup', function() {
+  if (this.value.length > 2) {
+    let studentsFiltered =
+      config.students.filter(student => student.name.toLowerCase().indexOf(this.value.toLowerCase()) != -1);
+  config.studentsFiltered = studentsFiltered;
+} else {
+  config.studentsFiltered = config.students;
+  }
+
+  // Mise à jour de DOM
+  divStudents.innerHTML = buildStudentTable();
+})
 // Initialisation
 init();
