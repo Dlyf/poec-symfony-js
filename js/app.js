@@ -1,3 +1,5 @@
+(function() {
+
 // I. Variables globales + Accès aux éléments du DOM
 var title = 'Formation JS';
 var l = console.log;
@@ -90,7 +92,9 @@ function buildStudentTable() {
     s += '<tr>' ;
     // Colonne Nom
     s += '<td>';
+    s += '<a href="async.html">';
     s += config.studentsFiltered[i].name;
+    s += '</a>';
     s += '</td>';
 
     //Colonne Age
@@ -184,3 +188,5 @@ textSearch.addEventListener('keyup', function() {
 })
 // Initialisation
 init();
+
+}) ()
